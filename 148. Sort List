@@ -1,0 +1,19 @@
+ /*  Given the head of a linked list, return the list after sorting it in ascending order.   */
+ 
+ ListNode* sortList(ListNode* head) {
+       if(head==NULL)  return NULL;
+        vector<int>vec;
+        ListNode* temp=head;
+        while(temp!=NULL){
+            vec.push_back(temp->val);
+            temp=temp->next;
+        }
+        sort(vec.begin(),vec.end());
+        temp=head;
+        for(auto i:vec){
+            temp->val=i;
+            temp=temp->next;
+        }
+        return head;
+        }
+};
