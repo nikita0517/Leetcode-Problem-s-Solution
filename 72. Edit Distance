@@ -1,0 +1,32 @@
+/*Example 1:
+
+Input: word1 = "horse", word2 = "ros"
+Output: 3
+Explanation: 
+horse -> rorse (replace 'h' with 'r')
+rorse -> rose (remove 'r')
+rose -> ros (remove 'e')  
+*/
+
+class Solution {
+public:
+    int minDistance(string word1, string word2) {
+        int m=word1.length();
+        int n=word2.length();
+        vector<vector<int>>memo(m+1,vector<int>(n+1,-1));
+        return editDist(word1,word2,m,n,memo);
+    }
+    int editDist(string& word1, string& word2,int m,int n,vector<vector<int>>&memo){
+        if(m==0) return memo[m][n]=n;
+        if(n==0)  return memo[m][n]=m;
+        if(memo[m][n]!=-1) return memo[m][n];
+        if(word1[m-1]==word2[n-1])
+            return memo[m][n]=editDist(word1,word2,m-1,n-1,memo);
+        else{
+        int insert=editDist(word1,word2,m,n-1,memo);
+        int deletechar=editDist(word1,word2,m-1,n,memo);
+        int replacechar=editDist(word1,word2,m-1,n-1,memo);
+        return memo[m][n]=1+min({insert,deletechar,replacechar});
+    }
+    }
+};
