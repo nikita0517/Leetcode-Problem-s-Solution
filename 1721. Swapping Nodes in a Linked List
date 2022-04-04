@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int count(ListNode* head){
+        ListNode* slow=head;
+        int count=0;
+        while(slow!=NULL){
+            slow=slow->next;
+            count++;
+        }
+        return count;
+    }
+    ListNode* swapNodes(ListNode* head, int k) {
+        int tot=count(head);
+        ListNode* pos=head,*kth=NULL,*lkth=NULL;
+        int ind=0;
+        while(pos){
+            if(ind==k-1)
+                kth=pos;
+            if(ind==tot-k)
+                lkth=pos;
+           // if(kth && lkth) break;
+            pos=pos->next;
+            ind++;
+        }
+        swap(kth->val,lkth->val);
+        return head;
+        }
+};
