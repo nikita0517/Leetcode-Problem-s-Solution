@@ -1,0 +1,30 @@
+/*
+Input: s = "rabbbit", t = "rabbit"
+Output: 3
+Explanation:
+As shown below, there are 3 ways you can generate "rabbit" from S.
+rabbbit
+rabbbit
+rabbbit
+*/
+
+class Solution {
+public:
+    int dp[1001][1001];
+    int helper(string& s,string& t,int i,int j){
+        if(j==t.length())
+            return 1;
+        if(i==s.length())
+            return 0;
+        else if(dp[i][j]!=-1)
+            return dp[i][j];
+        else if(s[i]==t[j])
+           return dp[i][j]=helper(s,t,i+1,j+1)+helper(s,t,i+1,j);
+        else
+            return dp[i][j]=helper(s,t,i+1,j);
+    }
+    int numDistinct(string s, string t) {
+        memset(dp,-1,sizeof(dp));
+       return helper(s,t,0,0);
+    }
+};
