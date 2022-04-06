@@ -1,0 +1,27 @@
+/*Example 1:
+
+Input: s = "catsanddog", wordDict = ["cat","cats","and","sand","dog"]
+Output: ["cats and dog","cat sand dog"]
+*/
+
+class Solution {
+public:
+    vector<string>helper(vector<string>&res,string& s, vector<string>& wordDict,int st,int e,string str){
+        if(st==e){
+            str.pop_back();
+            res.push_back(str);
+        }
+        else{
+            for(int k=st;k<e;k++){
+                string temp=s.substr(st,k-st+1);
+                if(find(wordDict.begin(),wordDict.end(),temp)!=wordDict.end())
+                helper(res,s,wordDict,k+1,e,str+temp+" ");
+            }
+        }
+        return res;
+    }
+    vector<string> wordBreak(string s, vector<string>& wordDict) {
+        vector<string>res;
+        return helper(res,s,wordDict,0,s.size(),"");
+    }
+};
