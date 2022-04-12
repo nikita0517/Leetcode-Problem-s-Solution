@@ -1,0 +1,26 @@
+/*
+Example 1:
+Input: rungs = [1,3,5,10], dist = 2
+Output: 2
+Explanation:
+You currently cannot reach the last rung.
+Add rungs at heights 7 and 8 to climb this ladder. 
+The ladder will now have rungs at [1,3,5,7,8,10].
+*/
+
+class Solution {
+public:
+    int addRungs(vector<int>& rungs, int dist) {
+        int prev_h=0,count=0;
+        for(int i=0;i<rungs.size();i++){
+            int diff=rungs[i]-prev_h;
+            if(diff>dist){
+                count+=(diff)/dist;
+            if(diff%dist==0)
+                count--;
+            }
+            prev_h=rungs[i];
+        }
+         return count;   
+    }
+};
