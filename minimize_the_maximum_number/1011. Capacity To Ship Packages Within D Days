@@ -1,0 +1,36 @@
+class Solution {
+public:
+    bool f(vector<int>w,int mid,int D){
+        int sum=0,day=1;
+        for(int i=0;i<w.size();i++){
+            sum+=w[i];
+            if(sum>mid){
+                day++;
+                sum=w[i];
+            }
+        }
+        if(day<=D)
+            return true;
+            return false;
+    }
+    
+    int shipWithinDays(vector<int>& w, int days) {
+        int mae=0,sum=0;
+        for(int i=0;i<w.size();i++){
+            mae=max(mae,w[i]);
+            sum+=w[i];
+        }
+        int low=mae,high=sum;
+        int mid;
+        while(low<=high){
+            mid=low+(high-low)/2;
+            if(f(w,mid,days)){
+                high=mid-1;
+            }
+            else{
+                low=mid+1;
+            }
+        }
+        return low;
+    }
+};
