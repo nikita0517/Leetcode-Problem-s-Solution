@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int maxSum(vector<int>& nums) {
+        map<int,vector<int>>mp;
+        for(auto n:nums){
+            int d=n;
+            int maxnum=0;
+            while(d>0){
+                maxnum=max(maxnum, d%10);
+                d/=10;
+            }
+            mp[maxnum].push_back(n);
+        }
+        int ans=-1;
+        for(auto [x,y]:mp){
+            sort(y.rbegin(),y.rend());
+            if(y.size()>=2) ans=max(ans,y[1]+y[0]);
+        }
+        return ans;
+    }
+};
