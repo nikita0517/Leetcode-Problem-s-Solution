@@ -1,0 +1,27 @@
+class Solution {
+public:
+int length(int n){
+    string s=to_string(n);
+    return s.length();
+}
+    int longestCommonPrefix(vector<int>& arr1, vector<int>& arr2) {
+        unordered_set<int>unset;
+        for(auto i:arr1){
+            while(i>0){
+                unset.insert(i);
+                i/=10;
+            }
+        }
+        int maxi=0;
+        for(auto it:arr2){
+            while(it>0){
+                if(unset.find(it)!=unset.end()){
+                    maxi=max(maxi,length(it));
+                    break;
+                }
+                it/=10;
+            }
+        }
+        return maxi;
+    }
+};
